@@ -11,9 +11,11 @@
   Our main model, need to have a price and a owner, Bearer.
 
 3. Routes 
+  3.1 Create a bearer
   3.1 List all stocks
   3.2 search from list stocks page
   3.3 Create a stock (Bearer and market_price)
   3.4 Update a stock
   4.5 Delete a stock, actually making some attribute false so it can be retrieved
 
+Primeiro passo apos criar os modelos e definir as validacoes esta sendo definir a rota para o index de todas as stocks.

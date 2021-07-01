@@ -1,0 +1,1 @@
+class API::V1::StocksController < API::V1::BaseController
