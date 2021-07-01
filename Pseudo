@@ -2,10 +2,10 @@
 
 2. model / validations
   2.1. users / devise
-  To be able to see all stock or update you need to be an API logged in user
+  To be able to see all stock or update you need to be an API logged in user. Can create many bearers
   2.2. bearers / name unique, belongs to an user and can have a lot of stocks
   User can create a bearer associate to your self. Maybe an user can have only one bearer. Business logic...
-  2.3. market_prices / unique inside def scope can have many stocks
+  2.3. market_prices / Can't exist two market_price objects with same price and currency. can have many stocks
   Market prices will be created one time only. If a price already exist it can be or not assigned to one or more stocks.
   2.4. stocks / belongs to a bearer and to a market price 
   Our main model, need to have a price and a owner, Bearer.
@@ -16,3 +16,4 @@
   3.3 Create a stock (Bearer and market_price)
   3.4 Update a stock
   4.5 Delete a stock, actually making some attribute false so it can be retrieved
+
