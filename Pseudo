@@ -18,4 +18,6 @@
   3.4 Update a stock
   4.5 Delete a stock, actually making some attribute false so it can be retrieved
 
+Primeiro deveria fazer testes para os modelos.
+
 Primeiro passo apos criar os modelos e definir as validacoes esta sendo definir a rota para o index de todas as stocks.
