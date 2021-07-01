@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_220535) do
+ActiveRecord::Schema.define(version: 2021_07_01_233027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 2021_07_01_220535) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "name"
-    t.bigint "bearers_id", null: false
+    t.bigint "bearer_id", null: false
     t.bigint "market_prices_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["bearers_id"], name: "index_stocks_on_bearers_id"
+    t.index ["bearer_id"], name: "index_stocks_on_bearer_id"
     t.index ["market_prices_id"], name: "index_stocks_on_market_prices_id"
   end
 
@@ -53,6 +53,6 @@ ActiveRecord::Schema.define(version: 2021_07_01_220535) do
   end
 
   add_foreign_key "bearers", "users"
-  add_foreign_key "stocks", "bearers", column: "bearers_id"
+  add_foreign_key "stocks", "bearers"
   add_foreign_key "stocks", "market_prices", column: "market_prices_id"
 end

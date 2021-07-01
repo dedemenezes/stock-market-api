@@ -1,6 +1,8 @@
-class API::V1::StocksController < API::V1::BaseController
+class Api::V1::BearersController < Api::V1::BaseController
+  
   def show
     @bearer = Bearer.find(params[:id])
+    authorize @bearer
   end
   
   def create
