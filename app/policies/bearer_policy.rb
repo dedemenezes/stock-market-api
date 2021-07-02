@@ -8,4 +8,8 @@ class BearerPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def create?
+    show?
+  end
 end
