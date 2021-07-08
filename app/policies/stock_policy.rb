@@ -8,4 +8,8 @@ class StockPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def create?
+    !Stock.find_by(name: record.name)
+  end
 end
