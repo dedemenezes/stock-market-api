@@ -1,0 +1,1 @@
+json.extract! @stock, :id,  :name, :market_price, :bearer
