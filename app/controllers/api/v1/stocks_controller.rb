@@ -1,27 +1,43 @@
+require 'pry-byebug'
 class Api::V1::StocksController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
-  before_action :set_stock, only: [ :show ]
+  before_action :set_stock, only: [ :show, :update ]
 
   def index
-    @stocks = policy_scope(Stock)
+    @stocks = policy_scope(Stock).order(:id)
     p @stocks
     @stocks
   end
 
   def show
   end
-
+  
   def create
+    make_stock
+    save_n_render
+  end
+  
+  def update
+    binding.pry
+    @stock.market_price.id == stock_params[:market_price_id].to_i && @stock.bearer.id == stock_params[:bearer_id].to_i
+    make_stock
+    save_n_render
+  end
+
+  private
+
+  def make_stock
     @stock = Stock.new(stock_params)
     authorize @stock
+  end
+  
+  def save_n_render
     if @stock.save
       render :show, stauts: :created
     else
       render_error
     end
   end
-  
-  private
 
   def stock_params
     params.require(:stock).permit(:name, :bearer_id, :market_price_id)
