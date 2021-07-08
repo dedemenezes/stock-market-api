@@ -1,5 +1,4 @@
 require "rails_helper"
-require 'pry-byebug'
 
 # RSpec.describe Bearer, :type => :model do
 #   context 'create instance:' do 
@@ -23,7 +22,6 @@ RSpec.describe Bearer, type: :model do
     User.create!(email: "testeemail@rspec.com", password: 123456)
     it 'accepts a valid bearer' do
       bearer = Bearer.new(name: 'Flavito', user: User.first)
-      binding.pry
       expect(bearer.save).to be(true)
     end
 
