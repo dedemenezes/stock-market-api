@@ -1,6 +1,10 @@
 class Api::V1::StocksController < Api::V1::BaseController
   before_action :set_stock, only: [ :show ]
 
+  def index
+    @stocks = policy_scope(Stock)
+  end
+
   def show
   end
 
