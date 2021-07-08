@@ -1,5 +1,5 @@
 json.array! @stocks do |stock|
-  json.extract! stock, :id, :market_price, :name, :bearer
+  json.extract! stock, :id, :name, :market_price, :bearer
 end
 
 # json.stocks @bearer.stocks do |stock|
