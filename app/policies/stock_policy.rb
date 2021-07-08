@@ -12,16 +12,19 @@ class StockPolicy < ApplicationPolicy
 
   
   def create?
-    bearer_user && !Stock.find_by(name: record.name)
+    bearer_user? && !name_exist?
   end
 
   def update?
-    bearer_user
+    bearer_user? && name_exist?
   end
 
-  def bearer_user
+  def bearer_user?
     record.bearer.user == user
+  end
 
+  def name_exist?
+    Stock.find_by(name: record.name)
   end
 
 end

@@ -13,24 +13,31 @@ class Api::V1::StocksController < Api::V1::BaseController
   end
   
   def create
-    make_stock
+    @stock = Stock.new(stock_params)
+    authorize @stock
     save_n_render
   end
   
   def update
-    binding.pry
-    @stock.market_price.id == stock_params[:market_price_id].to_i && @stock.bearer.id == stock_params[:bearer_id].to_i
-    make_stock
-    save_n_render
+    if same_price? && same_bearer?
+      @stock.update(stock_params)
+      render :show, stauts: :created
+    else
+      render json: { errors: "You can't update #{@stock.market_price.class} and #{@stock.bearer.class} values." },
+      status: :unprocessable_entity
+    end
   end
 
   private
 
-  def make_stock
-    @stock = Stock.new(stock_params)
-    authorize @stock
+  def same_bearer?
+    @stock.bearer.id == stock_params[:bearer_id].to_i
   end
-  
+
+  def same_price?
+    @stock.market_price.id == stock_params[:market_price_id].to_i
+  end
+
   def save_n_render
     if @stock.save
       render :show, stauts: :created
