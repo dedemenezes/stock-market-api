@@ -1,0 +1,1 @@
+json.extract! @mktprice, :id, :value_cents, :currency
