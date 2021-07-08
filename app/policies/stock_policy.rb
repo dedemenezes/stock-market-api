@@ -2,13 +2,14 @@ require 'pry-byebug'
 class StockPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(disable: false)
+      scope.all
     end
   end
 
   def show?
     true
   end
+
   
   def create?
     bearer_user? && !name_exist?
@@ -16,10 +17,6 @@ class StockPolicy < ApplicationPolicy
 
   def update?
     bearer_user? && name_exist?
-  end
-
-  def destroy?
-    bearer_user?
   end
 
   def bearer_user?
