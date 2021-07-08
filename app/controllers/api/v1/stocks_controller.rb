@@ -1,7 +1,7 @@
 require 'pry-byebug'
 class Api::V1::StocksController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
-  before_action :set_stock, only: [ :show, :update ]
+  before_action :set_stock, only: [ :show, :update, :destroy ]
 
   def index
     @stocks = policy_scope(Stock).order(:id)
@@ -17,7 +17,7 @@ class Api::V1::StocksController < Api::V1::BaseController
     authorize @stock
     save_n_render
   end
-  
+
   def update
     if same_price? && same_bearer?
       @stock.update(stock_params)
@@ -25,6 +25,15 @@ class Api::V1::StocksController < Api::V1::BaseController
     else
       render json: { errors: "You can't update #{@stock.market_price.class} and #{@stock.bearer.class} values." },
       status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @stock.disable = true
+    if @stock.save
+      render json: { message: "Stock deleted. Can't be restored."}, status: "202"
+    else
+      render_error
     end
   end
 
@@ -49,7 +58,7 @@ class Api::V1::StocksController < Api::V1::BaseController
   def stock_params
     params.require(:stock).permit(:name, :bearer_id, :market_price_id)
   end
-  
+
   def set_stock
     @stock = Stock.find(params[:id])
     authorize @stock
