@@ -1,11 +1,9 @@
 class Api::V1::StocksController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
-  before_action :set_stock, only: %i[show update]
+  before_action :set_stock, only: %i[show update destroy]
 
   def index
     @stocks = policy_scope(Stock).order(:id)
-    p @stocks
-    @stocks
   end
 
   def show; end
@@ -25,6 +23,15 @@ class Api::V1::StocksController < Api::V1::BaseController
       {
         errors: "You can't update #{@stock.market_price.class} and #{@stock.bearer.class} values."
       }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @stock.disable = true
+    if @stock.save
+       render :ok
+    else
+      render_error
     end
   end
 

@@ -17,6 +17,10 @@ class StockPolicy < ApplicationPolicy
     bearer_user? && name_exist?
   end
 
+  def destroy?
+    bearer_user?
+  end
+
   def bearer_user?
     record.bearer.user == user
   end
