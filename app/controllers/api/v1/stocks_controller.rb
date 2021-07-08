@@ -3,6 +3,8 @@ class Api::V1::StocksController < Api::V1::BaseController
 
   def index
     @stocks = policy_scope(Stock)
+    p @stocks
+    @stocks
   end
 
   def show
