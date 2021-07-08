@@ -1,4 +1,5 @@
 class Api::V1::MarketPricesController < Api::V1::BaseController
+  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
   def show
     @mktprice = MarketPrice.find(params[:id])
     authorize @mktprice

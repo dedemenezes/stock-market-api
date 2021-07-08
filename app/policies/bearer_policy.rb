@@ -10,6 +10,6 @@ class BearerPolicy < ApplicationPolicy
   end
 
   def create?
-    show?
+    record.user == user
   end
 end
