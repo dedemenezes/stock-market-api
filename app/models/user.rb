@@ -6,5 +6,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bearers
-  has_many :stocks, through: :bearers#, source: :bearers_table_foreign_key_to_stocks_table
+  has_many :stocks, through: :bearers
 end

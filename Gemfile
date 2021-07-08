@@ -37,6 +37,9 @@ gem 'pundit'
 # Auth for API
 gem 'simple_token_authentication'
 
+# Rubocop
+gem 'rubocop', '~> 1.18', require: false
+
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
 gem 'simple_form'

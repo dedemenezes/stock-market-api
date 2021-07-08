@@ -1,5 +1,6 @@
 class Api::V1::MarketPricesController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
+  acts_as_token_authentication_handler_for User, except: %i[index show]
+
   def show
     @mktprice = MarketPrice.find(params[:id])
     authorize @mktprice
@@ -22,7 +23,9 @@ class Api::V1::MarketPricesController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @mktprices.errors.full_messages },
-      status: :unprocessable_entity
+    render json:
+    {
+      errors: @mktprices.errors.full_messages
+    }, status: :unprocessable_entity
   end
 end

@@ -1,4 +1,3 @@
-require 'pry-byebug'
 class StockPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -10,7 +9,6 @@ class StockPolicy < ApplicationPolicy
     true
   end
 
-  
   def create?
     bearer_user? && !name_exist?
   end
@@ -26,5 +24,4 @@ class StockPolicy < ApplicationPolicy
   def name_exist?
     Stock.find_by(name: record.name)
   end
-
 end

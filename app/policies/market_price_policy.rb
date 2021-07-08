@@ -10,6 +10,6 @@ class MarketPricePolicy < ApplicationPolicy
   end
 
   def create?
-    MarketPrice.find_by(value_cents: record.value_cents) ? false : true 
+    MarketPrice.find_by(value_cents: record.value_cents) ? false : true
   end
 end
