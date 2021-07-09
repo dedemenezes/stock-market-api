@@ -1,3 +1,4 @@
+require 'pry-byebug'
 class Api::V1::BaseController < ActionController::API
   include Pundit
 
@@ -8,6 +9,7 @@ class Api::V1::BaseController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def save_n_render(instance)
+    binding.pry
     if instance.save
       return render json: { message: "Deleted"}, status: 200 if caller[1].include?("destroy")
       render :show, stauts: :created
