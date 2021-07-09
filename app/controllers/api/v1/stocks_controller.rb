@@ -29,7 +29,7 @@ class Api::V1::StocksController < Api::V1::BaseController
   def destroy
     @stock.disable = true
     if @stock.save
-       render :ok
+       render json: { message: "Done."}, status: :accepted
     else
       render_error
     end
