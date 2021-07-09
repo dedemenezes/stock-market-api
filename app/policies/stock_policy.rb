@@ -1,7 +1,7 @@
 class StockPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope.where(disable: false)
     end
   end
 
