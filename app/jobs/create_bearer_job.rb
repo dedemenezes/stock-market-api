@@ -6,7 +6,7 @@ class CreateBearerJob < ApplicationJob
     puts "zo/"
     puts "zo_"
     puts "zo/"
-    @bearer = Bearer.create!(name: "WorkersParty", user: User.last)
+    @bearer = Bearer.create!(name: "LulaDaSilva", user: User.last)
     puts @bearer
     puts "bye from your worker"
   end
