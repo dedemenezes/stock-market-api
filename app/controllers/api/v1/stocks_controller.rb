@@ -11,9 +11,10 @@ class Api::V1::StocksController < Api::V1::BaseController
   def create
     @stock = Stock.new(stock_params)
     authorize @stock
+    
     save_n_render
   end
-
+  
   def update
     if same_price? && same_bearer?
       @stock.update(stock_params)
@@ -22,8 +23,9 @@ class Api::V1::StocksController < Api::V1::BaseController
       render_error
     end
   end
-
+  
   def destroy
+    binding.pry
     @stock.disable = true
     save_n_render
   end

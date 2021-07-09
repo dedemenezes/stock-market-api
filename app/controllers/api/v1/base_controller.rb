@@ -9,6 +9,7 @@ class Api::V1::BaseController < ActionController::API
 
   def save_n_render(instance)
     if instance.save
+      return render json: { message: "Deleted"}, status: 200 if caller[1].include?("destroy")
       render :show, stauts: :created
     else
       render_error
@@ -23,11 +24,6 @@ class Api::V1::BaseController < ActionController::API
   end
 
   private
-
-  def action_calling?(action)
-    regex = /^.*#{action}.*/
-    caller[0].match(regex).present?
-  end
 
   def user_not_authorized(exception)
     render json: {

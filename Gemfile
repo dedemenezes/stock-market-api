@@ -37,12 +37,17 @@ gem 'pundit'
 # Auth for API
 gem 'simple_token_authentication'
 
+# Sidekiq - Background jobs
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+
 # Rubocop
 gem 'rubocop', '~> 1.18', require: false
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
 gem 'simple_form'
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
