@@ -1,4 +1,3 @@
-# require 'pry-byebug'
 class StockPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -19,14 +18,12 @@ class StockPolicy < ApplicationPolicy
   end
 
   def destroy?
-    binding.pry
     bearer_user?
   end
 
   private
 
   def bearer_user?
-    # binding.pry
     record.bearer.user == user
   end
 

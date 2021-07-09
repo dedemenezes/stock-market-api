@@ -25,7 +25,6 @@ class Api::V1::StocksController < Api::V1::BaseController
   end
   
   def destroy
-    binding.pry
     @stock.disable = true
     save_n_render
   end
