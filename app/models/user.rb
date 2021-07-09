@@ -7,4 +7,12 @@ class User < ApplicationRecord
 
   has_many :bearers
   has_many :stocks, through: :bearers
+
+  after_commit :async_update, on: [:home]
+
+  private
+
+  def async_update
+    UpdateJob.perform_later(@bearer.id)
+  end
 end
