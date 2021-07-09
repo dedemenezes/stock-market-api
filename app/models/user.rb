@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :bearers
   has_many :stocks, through: :bearers
+  has_one :client, dependent: :destroy
 
   #after_commit :async_update, on: [:home]
 #

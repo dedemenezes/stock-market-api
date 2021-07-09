@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :clients, only: %i[create]
+      resources :clients, only: %i[create show]
       resources :bearers, only: [:create, :show]
       resources :market_prices, only: [ :show, :create ]
       resources :stocks, only: [ :show, :create, :index, :update, :destroy ]
