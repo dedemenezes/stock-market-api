@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  
   acts_as_token_authenticatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -8,11 +9,11 @@ class User < ApplicationRecord
   has_many :bearers
   has_many :stocks, through: :bearers
 
-  after_commit :async_update, on: [:home]
-
-  private
-
-  def async_update
-    UpdateJob.perform_later(@bearer.id)
-  end
+  #after_commit :async_update, on: [:home]
+#
+  #private
+#
+  #def async_update
+  #  UpdateJob.perform_later(@bearer.id)
+  #end
 end
