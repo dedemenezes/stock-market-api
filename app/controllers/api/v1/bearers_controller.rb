@@ -10,23 +10,12 @@ class Api::V1::BearersController < Api::V1::BaseController
     @bearer = Bearer.new(bearer_params)
     @bearer.user = current_user
     authorize @bearer
-    if @bearer.save
-      render :show, status: :created
-    else
-      render_error
-    end
+    save_n_render(@bearer)
   end
 
   private
 
   def bearer_params
     params.require(:bearer).permit(:name)
-  end
-
-  def render_error
-    render json:
-    {
-      errors: @bearer.errors.full_messages
-    }, status: :unprocessable_entity
   end
 end

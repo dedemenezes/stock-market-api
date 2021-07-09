@@ -17,25 +17,22 @@ class Api::V1::StocksController < Api::V1::BaseController
   def update
     if same_price? && same_bearer?
       @stock.update(stock_params)
-      render :show, stauts: :created
-    else
-      render json:
-      {
-        errors: "You can't update #{@stock.market_price.class} and #{@stock.bearer.class} values."
-      }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @stock.disable = true
-    if @stock.save
-       render json: { message: "Done."}, status: :accepted
+      save_n_render
     else
       render_error
     end
   end
 
+  def destroy
+    @stock.disable = true
+    save_n_render
+  end
+
   private
+
+  def save_n_render
+    super(@stock)
+  end
 
   def same_bearer?
     @stock.bearer.id == stock_params[:bearer_id].to_i
@@ -45,14 +42,6 @@ class Api::V1::StocksController < Api::V1::BaseController
     @stock.market_price.id == stock_params[:market_price_id].to_i
   end
 
-  def save_n_render
-    if @stock.save
-      render :show, stauts: :created
-    else
-      render_error
-    end
-  end
-
   def stock_params
     params.require(:stock).permit(:name, :bearer_id, :market_price_id)
   end
@@ -60,12 +49,5 @@ class Api::V1::StocksController < Api::V1::BaseController
   def set_stock
     @stock = Stock.find(params[:id])
     authorize @stock
-  end
-
-  def render_error
-    render json:
-    {
-      errors: @stock.errors.full_messages
-    }, status: :unprocessable_entity
   end
 end

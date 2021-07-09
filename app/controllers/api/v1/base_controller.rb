@@ -7,6 +7,21 @@ class Api::V1::BaseController < ActionController::API
   rescue_from Pundit::NotAuthorizedError,   with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  def save_n_render(instance)
+    if instance.save
+      render :show, stauts: :created
+    else
+      render_error
+    end
+  end
+
+  def render_error
+    render json:
+    {
+      errors: @stock.errors.full_messages
+    }, status: :unprocessable_entity
+  end
+
   private
 
   def user_not_authorized(exception)
