@@ -24,6 +24,11 @@ class Api::V1::BaseController < ActionController::API
 
   private
 
+  def action_calling?(action)
+    regex = /^.*#{action}.*/
+    caller[0].match(regex).present?
+  end
+
   def user_not_authorized(exception)
     render json: {
       error: "Unauthorized #{exception.policy.class.to_s.underscore.camelize}.#{exception.query}"
