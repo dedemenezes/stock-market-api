@@ -9,9 +9,12 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def create
-    @user = User.new(user_params)
-    save_n_render(@user)
-    binding.pry
+    @user = User.create(user_params)
+    @client = Client.new
+    @client.user = @user
+    authorize @client
+  binding.pry
+    save_n_render(@client)
   end
 
   private
