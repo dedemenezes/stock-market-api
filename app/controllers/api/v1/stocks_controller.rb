@@ -1,4 +1,3 @@
-require 'pry-byebug'
 class Api::V1::StocksController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
   before_action :set_stock, only: %i[show update destroy]
@@ -10,7 +9,6 @@ class Api::V1::StocksController < Api::V1::BaseController
   def show; end
 
   def create
-    binding.pry
     @stock = Stock.new(stock_params)
     authorize @stock
     
