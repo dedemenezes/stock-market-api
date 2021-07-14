@@ -9,7 +9,7 @@ Tech challenge practice. RESTful API built from scratch.
 * [Reference](#reference)
 
 ## Overview
-The idea here is to practice how to build a RESTful API. A pretty simple one. 
+The idea here was to practice how to build a RESTful API.
 
 Without login you can check an existing bearer any time.
 
