@@ -1,5 +1,5 @@
 # Stock Market API
-Tech challenge practice. First RESTful API built from scratch by me.
+Tech challenge practice. RESTful API built from scratch.
 
 ## Table of contents
 * [Overview](#overview)
