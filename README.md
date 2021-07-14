@@ -43,7 +43,7 @@ curl -s http://stock--api.herokuapp.com/api/v1/bearers/1
 ```console
 curl -i -X POST \
   -H 'Content-Type: application/json' \
-  -d '{ "user": { "email": "<YOU@EMAIL>", "password": "<YOUR_PASSWORD" } }' \
+  -d '{ "user": { "email": "<YOU@EMAIL>", "password": "<YOUR_PASSWORD>" } }' \
   https://stock--api.herokuapp.com/api/v1/clients
 ```
 Use your token to create a [bearer](#bearer). Only bearers can CRUD stocks.
